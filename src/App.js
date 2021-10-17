@@ -33,7 +33,7 @@ function App() {
     } catch (error) {
       setLoading(false);
       console.log(error);
-    }
+    } 
   };
 
   let { temp, pressure, humidity } = weathers;
