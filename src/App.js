@@ -15,9 +15,7 @@ function App() {
 
   // console.log(moment,'MOMENT');
 
-  let url1 = 'https://api.openweathermap.org/data/2.5/onecall?lat=28.2791&lon=77.7684&exclude=hourly,minutely&units=metric&appid=19e66b5d28a7058c656d6585b66c39fd'
-
-  let url2 = `http://api.openweathermap.org/data/2.5/weather?q=pune&units=metric&appid=19e66b5d28a7058c656d6585b66c39fd`;
+  let url2 = `http://api.openweathermap.org/data/2.5/weather?q=dhanbad&units=metric&appid=19e66b5d28a7058c656d6585b66c39fd`;
   let iconUrl = "http://openweathermap.org/img/wn/10d@2x.png";
 
   const fetchWeather = async () => {
@@ -26,7 +24,7 @@ function App() {
       const response = await fetch(url2);
       const data = await response.json();
       setLoading(false);
-      setAllData(data);
+      setAllData(data.weather[0]);
       setWeathers(data.main);
       setCity(data.sys);
       // console.log("WEATHER", weather.main.temp);
@@ -40,7 +38,7 @@ function App() {
   let { sunrise, sunset } = city;
   
   console.log(allData, 'ALL DATA');
-
+  
   // let {temp, pressure, humidity, sunrise, sunset} = weathers.current
 
   const handleOnChange = (e) => {
@@ -53,6 +51,8 @@ function App() {
       setLat(position.coords.latitude);
       setLong(position.coords.longitude);
     });
+
+
 
     // console.log("Latitude is:", lat)
     // console.log("Longitude is:", long)
@@ -90,13 +90,14 @@ function App() {
             <div>
             <p className="fs-1 fw-bold   ">{temp} ^C</p>
             <p className='text-center fs-3 fw-bold' >
-                {allData.weather[0].main}
+                {allData.main}
               </p>
             </div>
             
               <img
                 className=""
-                src={`http://openweathermap.org/img/wn/${allData.weather[0].icon}@4x.png`}
+                src={`http://openweathermap.org/img/wn/${allData.icon}@4x.png`}
+                // src='http://openweathermap.org/img/wn/01d@4x.png'
                 alt="img"
               />
               
